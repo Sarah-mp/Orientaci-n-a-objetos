@@ -89,7 +89,7 @@ class juego:
         print(pieza)
         if pieza.estado == "caida":
             pieza.cambiar_estado("caida")
-            print (f"La Pieza: {pieza.forma} ha caído y su estado es {pieza.estado}...")
+            print (f"La Pieza: {pieza.forma} ha caído y su estado es {pieza._estado}...")
             self.pieza_en_juego = None
         else:
             print ("No hay piezas cayendo actualmente...")
