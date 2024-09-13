@@ -1,19 +1,19 @@
 class Libro: 
    
    def __init__(self,autor, titulo)-> None:
-    self.__autor = autor
-    self.__titulo = titulo
+    self._autor = autor
+    self._titulo = titulo
 
     @property
     def autor(self):
-        return self.__autor
+        return self._autor
     
     @autor.setter 
     def autor(self, nuevo):
         self.__autor = nuevo
     
     def __str__(self)-> str:
-        return f"{self.__titulo} - {self.__autor}"
+        return f"{self._titulo} - {self._autor}"
     
     
 
