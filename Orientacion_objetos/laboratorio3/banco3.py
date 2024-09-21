@@ -13,7 +13,7 @@ class Identificable:
 # Clase Cuenta base (hereda de Identificable)
 class Cuenta(Identificable):
     def __init__(self, numero_cuenta, saldo):
-        Identificable._init_(self, numero_cuenta)  # El ID es el número de cuenta
+        Identificable.__init__(self, numero_cuenta)  # El ID es el número de cuenta
         self.saldo = saldo
         self.operacion_aplicada = False  # Bandera para evitar múltiples aplicaciones
 
@@ -23,7 +23,7 @@ class Cuenta(Identificable):
 # Clase CuentaAhorro que hereda de Cuenta, con el atributo interés
 class CuentaAhorro(Cuenta):
     def __init__(self, numero_cuenta, saldo, interes):
-        super()._init_(numero_cuenta, saldo)
+        super().__init__(numero_cuenta, saldo)
         self.interes = interes
 
     # Método para aplicar el interés (solo una vez)
@@ -35,7 +35,7 @@ class CuentaAhorro(Cuenta):
 # Clase CuentaCorriente que hereda de Cuenta, con el atributo descuento
 class CuentaCorriente(Cuenta):
     def __init__(self, numero_cuenta, saldo, descuento):
-        super().__init__(numero_cuenta, saldo)
+        super().init(numero_cuenta, saldo)
         self.descuento = descuento
 
     # Método para aplicar el descuento (solo una vez)
@@ -47,8 +47,8 @@ class CuentaCorriente(Cuenta):
 # Clase Cliente que hereda de Persona e Identificable (herencia múltiple)
 class Cliente(Persona, Identificable):
     def __init__(self, cedula, nombre):
-        Persona.__init_(self, nombre)  # Llama al constructor de Persona
-        Identificable._init_(self, cedula)  # Llama al constructor de Identificable
+        Persona.__init__(self, nombre)  # Llama al constructor de Persona
+        Identificable.__init__(self, cedula)  # Llama al constructor de Identificable
         self.cuentas = []  # Cada cliente tendrá una lista de cuentas
 
     def agregar_cuenta(self, cuenta):
