@@ -1,5 +1,5 @@
 class Estudiante:
-    # Atributos de clase
+   
     institucion = "Institución X"  # Todos los estudiantes pertenecen a la misma institución
     num_estudiantes = 0  # Contador de estudiantes
 

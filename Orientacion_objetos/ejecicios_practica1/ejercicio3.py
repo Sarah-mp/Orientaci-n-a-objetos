@@ -29,7 +29,7 @@ class Estudiante:
         else:
             raise ValueError("La nota 2 debe estar entre 0 y 5")
 
-    # Método para calcular el promedio
+
     def obtener_nota_promedio(self):
         return (self.__nota1 + self.__nota2) / 2
 

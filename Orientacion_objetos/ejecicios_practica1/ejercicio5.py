@@ -1,5 +1,5 @@
 class Estudiante:
-    # Atributos de clase
+  
     institucion = "Institución X"  # Todos los estudiantes pertenecen a la misma institución
     num_estudiantes = 0  # Contador de estudiantes
 
@@ -9,14 +9,14 @@ class Estudiante:
         self.set_nota2(nota2)
         Estudiante.num_estudiantes += 1
 
-    # Getters y setters para el atributo nombre
+  
     def get_nombre(self):
         return self.__nombre
 
     def set_nombre(self, nombre):
         self.__nombre = nombre
 
-    # Getters y setters para el atributo nota1
+
     def get_nota1(self):
         return self.__nota1
 
@@ -26,7 +26,7 @@ class Estudiante:
         else:
             raise ValueError("La nota 1 debe estar entre 0 y 5")
 
-    # Getters y setters para el atributo nota2
+  
     def get_nota2(self):
         return self.__nota2
 
@@ -36,11 +36,11 @@ class Estudiante:
         else:
             raise ValueError("La nota 2 debe estar entre 0 y 5")
 
-    # Método para calcular el promedio
+   
     def obtener_nota_promedio(self):
         return (self.__nota1 + self.__nota2) / 2
 
-    # Método para mostrar la información del estudiante
+   
     def mostrar_informacion(self):
         promedio = self.obtener_nota_promedio()
         print(f"Nombre: {self.__nombre}")
@@ -49,22 +49,21 @@ class Estudiante:
         print(f"Promedio: {promedio:.2f}")
         print(f"Institución: {Estudiante.institucion}")
 
-    # Sobrescribir el método __str__ para personalizar la representación del objeto
+    
     def __str__(self):
         promedio = self.obtener_nota_promedio()
         return f"Estudiante: {self.__nombre}, Promedio: {promedio:.2f}, Institución: {Estudiante.institucion}"
 
-    # Método de clase para cambiar la institución
+    
     @classmethod
     def cambiar_institucion(cls, nueva_institucion):
         cls.institucion = nueva_institucion
 
-    # Método de clase para obtener el número total de estudiantes
     @classmethod
     def obtener_num_estudiantes(cls):
         return cls.num_estudiantes
 
-    # Método de clase para ver la escala de calificación
+
     @classmethod
     def ver_escala(cls):
         print(f"{'Nota'.ljust(10)}{'Escala'.ljust(15)}")
