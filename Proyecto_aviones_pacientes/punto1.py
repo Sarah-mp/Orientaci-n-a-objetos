@@ -1,3 +1,5 @@
+from datetime import datetime
+
 class Avion:
     def __init__(self, num_asientos, capacidad_combustible, velocidad_maxima):
         self.num_asientos = num_asientos
@@ -5,113 +7,111 @@ class Avion:
         self.velocidad_maxima = velocidad_maxima
 
     def get_num_asientos(self):
-
         return self.num_asientos
 
     def get_capacidad_combustible(self):
-        """Devuelve la capacidad de combustible del avión."""
         return self.capacidad_combustible
 
     def get_velocidad_maxima(self):
-        """Devuelve la velocidad máxima del avión."""
         return self.velocidad_maxima
 
-class Vuelo:
+
+class Vuelo(Avion):
     def __init__(self, origen, destino, fecha_salida, avion):
-        """Inicializa un vuelo con origen, destino, fecha de salida y un avión."""
+        super().__init__(avion.get_num_asientos(), avion.get_capacidad_combustible(), avion.get_velocidad_maxima())
         self.origen = origen
         self.destino = destino
         self.fecha_salida = fecha_salida
         self.avion = avion
 
     def get_origen(self):
-        """Devuelve el origen del vuelo."""
         return self.origen
 
     def get_destino(self):
-        """Devuelve el destino del vuelo."""
         return self.destino
 
     def get_fecha_salida(self):
-        """Devuelve la fecha de salida del vuelo."""
         return self.fecha_salida
 
     def get_avion(self):
-        """Devuelve el avión asociado al vuelo."""
         return self.avion
 
     def calcular_tiempo_vuelo(self, distancia):
-        """Calcula el tiempo de vuelo basado en la distancia y la velocidad máxima del avión."""
-        if self.avion.get_velocidad_maxima() > 0:
-            return distancia / self.avion.get_velocidad_maxima()
+        if self.get_velocidad_maxima() > 0:
+            return distancia / self.get_velocidad_maxima()
         else:
             return None
 
-def mostrar_menu_punto1():
-    print("\nMenú (Punto 1):")
-    print("1. Agregar un nuevo avión")
-    print("2. Agregar un nuevo vuelo")
-    print("3. Mostrar información de todos los vuelos")
-    print("4. Salir")
 
-def main_punto1():
+def menu():
     aviones = []
     vuelos = []
-
+    
     while True:
-        mostrar_menu_punto1()
-        opcion = input("Selecciona una opción: ")
+        print("\nMenu:")
+        print("1. Agregar un nuevo avión")
+        print("2. Agregar un nuevo vuelo")
+        print("3. Mostrar información de todos los vuelos")
+        print("4. Salir")
+
+        opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
-            num_asientos = int(input("Número de asientos: "))
-            capacidad_combustible = float(input("Capacidad de combustible (en litros): "))
-            velocidad_maxima = int(input("Velocidad máxima (en km/h): "))
+            num_asientos = int(input("Ingrese el número de asientos: "))
+            capacidad_combustible = float(input("Ingrese la capacidad de combustible (litros): "))
+            velocidad_maxima = int(input("Ingrese la velocidad máxima (km/h): "))
             avion = Avion(num_asientos, capacidad_combustible, velocidad_maxima)
             aviones.append(avion)
-            print("Avión agregado con éxito.\n")
+            print("Avión agregado con éxito.")
 
         elif opcion == "2":
             if not aviones:
-                print("No hay aviones disponibles. Primero agrega un avión.\n")
+                print("No hay aviones disponibles. Por favor, agregue un avión primero.")
                 continue
 
-            origen = input("Ciudad de origen: ")
-            destino = input("Ciudad de destino: ")
-            fecha_salida = input("Fecha de salida (formato: dd/mm/yyyy): ")
+            origen = input("Ingrese el origen del vuelo: ")
+            destino = input("Ingrese el destino del vuelo: ")
 
+            while True:
+                fecha_salida = input("Ingrese la fecha de salida (dd/mm/yyyy): ")
+                try:
+                    fecha_salida_obj = datetime.strptime(fecha_salida, "%d/%m/%Y")
+                    fecha_salida = fecha_salida_obj.strftime("%d/%m/%Y")
+                    break
+                except ValueError:
+                    print("Fecha inválida. Por favor ingrese una fecha en el formato dd/mm/yyyy.")
 
-            print("Aviones disponibles:")
-            for i, avion in enumerate(aviones, start=1):
-                print(f"{i}. {avion.get_num_asientos()} asientos, {avion.get_capacidad_combustible()} litros de combustible, {avion.get_velocidad_maxima()} km/h")
-
-            avion_index = int(input("Selecciona el número del avión: ")) - 1
-            if 0 <= avion_index < len(aviones):
-                vuelo = Vuelo(origen, destino, fecha_salida, aviones[avion_index])
-                vuelos.append(vuelo)
-                print("Vuelo agregado con éxito.\n")
+            print("Seleccione un avión:")
+            for idx, a in enumerate(aviones):
+                print(f"{idx + 1}. Avión {idx + 1}: {a.get_num_asientos()} asientos, {a.get_capacidad_combustible()} litros de combustible, {a.get_velocidad_maxima()} km/h")
+            
+            seleccion = int(input("Seleccione el número del avión: ")) - 1
+            
+            if 0 <= seleccion < len(aviones):
+                distancia = float(input("Ingrese la distancia entre ciudades (en km): "))
+                vuelo = Vuelo(origen, destino, fecha_salida, aviones[seleccion])
+                tiempo_vuelo = vuelo.calcular_tiempo_vuelo(distancia)
+                vuelos.append((vuelo, tiempo_vuelo))
+                print(f"Vuelo agregado con éxito. Tiempo estimado de vuelo: {tiempo_vuelo:.2f} horas.")
             else:
-                print("Selección inválida.\n")
+                print("Selección inválida.")
 
         elif opcion == "3":
             if not vuelos:
-                print("No hay vuelos registrados.\n")
+                print("No hay vuelos disponibles.")
             else:
-                for i, vuelo in enumerate(vuelos, start=1):
-                    avion = vuelo.get_avion()
-                    print(f"Vuelo {i}:")
-                    print(f"  Origen: {vuelo.get_origen()}")
-                    print(f"  Destino: {vuelo.get_destino()}")
-                    print(f"  Fecha de salida: {vuelo.get_fecha_salida()}")
-                    print(f"  Número de asientos: {avion.get_num_asientos()}")
-                    print(f"  Capacidad de combustible: {avion.get_capacidad_combustible()} litros")
-                    print(f"  Velocidad máxima: {avion.get_velocidad_maxima()} km/h\n")
+                for vuelo, tiempo in vuelos:
+                    print(f"Vuelo de {vuelo.get_origen()} a {vuelo.get_destino()} el {vuelo.get_fecha_salida()}. "
+                          f"Avión con {vuelo.get_num_asientos()} asientos, velocidad máxima {vuelo.get_velocidad_maxima()} km/h. "
+                          f"Tiempo estimado de vuelo: {tiempo:.2f} horas.")
 
         elif opcion == "4":
             print("Saliendo del programa.")
             break
 
         else:
-            print("Opción no válida. Por favor, intenta de nuevo.\n")
+            print("Opción inválida. Intente nuevamente.")
+
 
 if __name__ == "__main__":
-    main_punto1()
+    menu()
