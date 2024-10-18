@@ -1,5 +1,5 @@
 class Libro: 
-    _libreria = "Amazon"
+    __libreria = "Amazon"
     pais = "colombia"
 
     def __init__(self, titulo, autor)-> None:
