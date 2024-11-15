@@ -1,12 +1,13 @@
 import sqlite3
+import os
 
 class Conexion:
-    def __init__(self):
+    def __init__(self, ruta):
         try:
-            conexion = sqlite3.connect("./QT_y_python/datos/datos.db")
+            ruta = os.path.join(ruta, 'datos/dato.db')
+            self.conexion = sqlite3.connect(ruta)
             print("conexion ok")
         except Exception as e:
-            conexion = None
+            self.conexion = None
             print(f"Error al conectar a la base de datos: {e}")
 
-prueba = Conexion()
