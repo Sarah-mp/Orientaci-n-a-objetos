@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>586</width>
-    <height>391</height>
+    <width>654</width>
+    <height>503</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QLabel" name="titulo">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>180</x>
       <y>20</y>
       <width>311</width>
       <height>41</height>
@@ -33,7 +33,7 @@
    <widget class="QLabel" name="logo">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>150</x>
       <y>70</y>
       <width>371</width>
       <height>201</height>
@@ -64,8 +64,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>290</y>
+      <x>270</x>
+      <y>370</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -81,13 +81,51 @@ border-radius:10px;
      <string>Iniciar</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="user">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>289</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>Ingresar usuario</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>329</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+    <property name="placeholderText">
+     <string>Ingresar contraseña</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>586</width>
+     <width>654</width>
      <height>21</height>
     </rect>
    </property>
